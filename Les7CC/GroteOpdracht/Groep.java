@@ -1,6 +1,13 @@
+import java.util.Iterator;
+
 public class Groep<T> implements GroepInterface<T>, Iterable<T> {
     
     //Still need to make a main method that tests all the methods
+    public static void main (String[] args) {
+        Groep<Integer> bezoekers = new Groep<>(2);
+        
+        System.out.println(bezoekers.getCapaciteit());
+    }
     
     Object[] groep;
     int index = 0;
@@ -21,7 +28,7 @@ public class Groep<T> implements GroepInterface<T>, Iterable<T> {
             int counter = 0;
             for (Object i : groep) {
                 groepTwee[counter] = i;
-                counter++
+                counter++;
             }
             
             groep = groepTwee;
@@ -31,16 +38,9 @@ public class Groep<T> implements GroepInterface<T>, Iterable<T> {
     }
     
     //Returns the value of the given array index
+    @SuppressWarnings("unchecked")
     public T get (int i){
-        if (i <= groep.length) {
-            if (groep[i] != null) {
-                return (T) groep[i];
-            } else {
-                return "Index not set";
-            }
-        } else {
-            return "Index out of bounds";
-        }
+        return (T) groep[i];
     }
     
     
@@ -51,16 +51,17 @@ public class Groep<T> implements GroepInterface<T>, Iterable<T> {
     
     
     //Checks if groep is empty or not and returns true or false
-    public boolean isLeeg {
+    public boolean isLeeg() {
         return (this.index == 0);
     }
     
     
     //Empties the groep array
     public void maakLeeg() {
-        for (Object i : groep) {
-            if (i != null) i = null;
+        for (int i = 0; i < index; i++) {
+            groep[i] = null;
         }
+        index = 0;
     }
     
     public Iterator<T> iterator() {
